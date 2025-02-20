@@ -130,7 +130,7 @@ export default function CreateUser() {
 
               <footer className="flex justify-between">
                 <Button type="submit" className="w-full">
-                  Login
+                  Sign Up
                 </Button>
               </footer>
             </form>
