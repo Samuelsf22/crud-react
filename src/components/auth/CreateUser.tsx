@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import {
   Form,
   FormControl,
@@ -31,6 +31,8 @@ const CreateSchema = z.object({
 });
 
 export default function CreateUser() {
+  const navigate = useNavigate();
+
   const [createUser, { data, isError, isSuccess }] = useCreateUserMutation();
 
   const form = useForm({
@@ -40,8 +42,9 @@ export default function CreateUser() {
   useEffect(() => {
     if (isSuccess && data?.token) {
       localStorage.setItem("auth_token", data.token);
+      navigate("/");
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, navigate]);
 
   const onSubmit = form.handleSubmit(() => {
     const first_name = form.getValues("first_name");
@@ -126,10 +129,9 @@ export default function CreateUser() {
               )}
 
               <footer className="flex justify-between">
-                <Link to="/">
-                  <Button variant="outline">Cancel</Button>
-                </Link>
-                <Button type="submit">Login</Button>
+                <Button type="submit" className="w-full">
+                  Login
+                </Button>
               </footer>
             </form>
           </Form>

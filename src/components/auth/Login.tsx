@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import {
   Form,
   FormControl,
@@ -29,17 +29,20 @@ const loginSchema = z.object({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [login, { data, isError, isSuccess }] = useLoginMutation();
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
-  
+
   useEffect(() => {
     if (isSuccess && data?.token) {
       localStorage.setItem("auth_token", data.token);
+      navigate("/");
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, navigate]);
 
   const onSubmit = form.handleSubmit(() => {
     const username = form.getValues("username");
@@ -96,10 +99,9 @@ export default function Login() {
               )}
 
               <footer className="flex justify-between">
-                <Link to="/">
-                  <Button variant="outline">Cancel</Button>
-                </Link>
-                <Button type="submit">Login</Button>
+                <Button type="submit" className="w-full">
+                  Login
+                </Button>
               </footer>
             </form>
           </Form>
