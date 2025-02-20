@@ -5,7 +5,7 @@ const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<JwtToken, Login>({
       query: (login: Login) => ({
-        url: "auth/login",
+        url: "/auth/login",
         method: "POST",
         body: login,
       }),
@@ -16,7 +16,7 @@ const authApi = api.injectEndpoints({
 
     createUser: builder.mutation<JwtToken, User>({
       query: (user: User) => ({
-        url: "auth/create",
+        url: "/auth/create",
         method: "POST",
         body: user,
       }),
