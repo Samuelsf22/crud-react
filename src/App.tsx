@@ -1,9 +1,12 @@
-import { Button } from "@/components/ui/button"
+import Navbar from "@/layout/Navbar";
+import { BrowserRouter } from "react-router";
 
 export default function Home() {
   return (
-    <div>
-      <Button variant="destructive">Click me</Button>
-    </div>
-  )
+    <>
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    </>
+  );
 }
