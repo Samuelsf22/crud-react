@@ -4,7 +4,10 @@ import { User } from "@/models/User";
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllUsers: builder.query({
-      query: () => "user",
+      query: () => ({
+        url: "user",
+        method: "GET",
+      }),
       providesTags: ["User"],
     }),
 
@@ -21,6 +24,7 @@ const userApi = api.injectEndpoints({
         method: "PUT",
         body: user,
       }),
+      invalidatesTags: ["User"],
     }),
 
     deleteUser: builder.mutation({
@@ -28,6 +32,7 @@ const userApi = api.injectEndpoints({
         url: `user?public_id=${public_id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
