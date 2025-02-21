@@ -11,6 +11,7 @@ import {
 import { DataTableColumnHeader } from "../ui/data-table-column-header";
 import { EllipsisVertical } from "lucide-react";
 import { useDeleteUserMutation } from "@/features/user/userApi";
+import { useNavigate } from "react-router";
 
 export const UserColumns: ColumnDef<User>[] = [
   {
@@ -40,6 +41,7 @@ export const UserColumns: ColumnDef<User>[] = [
     accessorKey: "actions",
     cell: function ActionsCell({ row }) {
       const [deleteUser] = useDeleteUserMutation();
+      const navigate = useNavigate();
 
       return (
         <DropdownMenu>
@@ -50,13 +52,21 @@ export const UserColumns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => deleteUser(row.getValue("public_id"))}>
+            <DropdownMenuItem
+              onClick={() =>
+                navigate(`/edit/${row.getValue("public_id")}`)
+              }
+            >
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => deleteUser(row.getValue("public_id"))}
+            >
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
     },
-  }
+  },
 ];

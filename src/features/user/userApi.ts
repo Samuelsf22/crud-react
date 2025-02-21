@@ -24,6 +24,7 @@ const userApi = api.injectEndpoints({
         method: "PUT",
         body: user,
       }),
+      invalidatesTags: ["User"],
     }),
 
     deleteUser: builder.mutation({

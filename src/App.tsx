@@ -3,6 +3,7 @@ import Login from "./components/auth/Login";
 import Layout from "./layout/Layout";
 import CreateUser from "./components/auth/CreateUser";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
+import EditUser from "./components/user/EditUser";
 
 export default function App() {
   const auth = !!localStorage.getItem("auth_token");
@@ -17,6 +18,7 @@ export default function App() {
             }
           >
             <Route path="/" element={<Layout />} />
+            <Route path="/edit/:public_id" element={<EditUser />} />
           </Route>
           <Route
             element={<ProtectedRoute canActivate={!auth} redirectPath="/" />}
