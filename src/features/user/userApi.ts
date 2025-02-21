@@ -4,7 +4,10 @@ import { User } from "@/models/User";
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllUsers: builder.query({
-      query: () => "user",
+      query: () => ({
+        url: "user",
+        method: "GET",
+      }),
       providesTags: ["User"],
     }),
 
