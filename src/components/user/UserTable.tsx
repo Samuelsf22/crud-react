@@ -22,6 +22,7 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -53,39 +54,14 @@ export function UserTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center py-4">
-        <div className="max-w-xs">
-          <Input
-            type="text"
-            value={filtering}
-            onChange={(event) => setFiltering(event.target.value)}
-            placeholder="Search..."
-            className="ps-9 w-80"
-          />
-        </div>
-        {/* This one too */}
-        {/* <DropdownMenu>
-        <DropdownMenuTrigger>Columns</DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {table
-            .getAllColumns()
-            .filter((column) => column.getCanHide())
-            .map((column) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) =>
-                    column.toggleVisibility(!!value)
-                  }
-                >
-                  {column.id}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-        </DropdownMenuContent>
-      </DropdownMenu> */}
+      <div className="flex justify-between items-center gap-4">
+        <Input
+          type="text"
+          value={filtering}
+          onChange={(event) => setFiltering(event.target.value)}
+          placeholder="Search..."
+          className="w-80"
+        />
       </div>
       <div>
         <Table>
@@ -145,23 +121,22 @@ export function UserTable<TData, TValue>({
           {table.getPageCount()}
         </div>
         <div className="space-x-2">
-          <button
-            type="button"
-            className="p-2 inline-flex justify-center items-center gap-x-2 text-sm rounded-full focus:outline-none focus:text-primary hover:text-primary hover:bg-light-background-100 disabled:opacity-50 disabled:pointer-events-none border border-transparent transition-colors duration-300 ease-in-out"
+          <Button
+            variant="link"
+            size="icon"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <ChevronLeft size={22} />
-          </button>
-
-          <button
-            type="button"
-            className="p-2 inline-flex justify-center items-center gap-x-2 text-sm rounded-full focus:outline-none text-light-foreground-400 dark:text-dark-foreground-300 focus:text-primary hover:text-primary dark:hover:text-dark-foreground hover:bg-light-background-100 dark:hover:bg-dark-background-800 dark:focus:text-dark-foreground disabled:opacity-50 disabled:pointer-events-none border border-transparent transition-colors duration-300 ease-in-out"
+            <ChevronLeft />
+          </Button>
+          <Button
+            variant="link"
+            size="icon"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <ChevronRight size={22} />
-          </button>
+            <ChevronRight />
+          </Button>
         </div>
       </div>
     </div>

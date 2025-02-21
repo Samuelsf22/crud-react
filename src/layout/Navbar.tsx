@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("auth_token");
+    navigate("/login");
+  };
+
   const menuItems = [
     { name: "Home", to: "/" },
-    { name: "About", to: "/about" },
+    { name: "Sign Out", onClick: handleSignOut },
   ];
 
   return (
@@ -14,9 +21,15 @@ export default function Navbar() {
           <ul className="flex">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <Link to={item.to}>
-                  <Button variant="link">{item.name}</Button>
-                </Link>
+                {item.to ? (
+                  <Link to={item.to}>
+                    <Button variant="link">{item.name}</Button>
+                  </Link>
+                ) : (
+                  <Button variant="link" onClick={item.onClick}>
+                    {item.name}
+                  </Button>
+                )}
               </li>
             ))}
           </ul>

@@ -1,6 +1,13 @@
 import { useGetAllUsersQuery } from "@/features/user/userApi";
-import { UserColumns } from "./UserColums";
+import { UserColumns } from "./UserColumns";
 import { UserTable } from "./UserTable";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 export default function UserPage() {
   const { data, isError, isLoading } = useGetAllUsersQuery({});
@@ -12,9 +19,14 @@ export default function UserPage() {
   console.log(data);
 
   return (
-    <div>
-      <h1>Users</h1>
-      <UserTable columns={UserColumns} data={data} />
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Users</CardTitle>
+        <CardDescription>Manage users</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <UserTable columns={UserColumns} data={data} />
+      </CardContent>
+    </Card>
   );
 }
