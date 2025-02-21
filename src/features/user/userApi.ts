@@ -31,6 +31,7 @@ const userApi = api.injectEndpoints({
         url: `user?public_id=${public_id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
